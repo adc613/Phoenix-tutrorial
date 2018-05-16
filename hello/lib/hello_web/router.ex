@@ -1,7 +1,21 @@
+defmodule HelloWeb.Plugs.Locale do
+  import Plug.Conn
+
+  @locales ["en", "fr", "de"]
+
+  def init(default), do: default
+
+  def call(conn, _default) do
+    IO.puts "hello"
+    conn
+  end
+end
+
 defmodule HelloWeb.Router do
   use HelloWeb, :router
 
   pipeline :browser do
+    plug HelloWeb.Plugs.Locale
     plug :accepts, ["html"]
     plug :fetch_session
     plug :fetch_flash
